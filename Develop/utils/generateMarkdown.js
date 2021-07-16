@@ -1,10 +1,6 @@
 // TODO: Create a function that returns a license badge based on which license is passed in
 // If there is no license, return an empty string
 function renderLicenseBadge(license) {
-    // if (license === "MIT") {
-    //     return ("https://img.shields.io/badge/License-MIT-yellow.svg")
-    // }
-    // else if (license)
     switch (license) {
         case "MIT":
             return ("https://img.shields.io/badge/License-MIT-yellow.svg")
@@ -19,19 +15,27 @@ function renderLicenseBadge(license) {
 
     }
 
-
-
 }
 // TODO: Create a function that returns the license link
 // If there is no license, return an empty string
 function renderLicenseLink(license) {
-    if (license === "MIT") {
-        return ("https://opensource.org/licenses/MIT")
+    switch (license) {
+        case "MIT":
+            return ("https://opensource.org/licenses/MIT")
+        case "APACHE 2.0":
+            return ("https://opensource.org/licenses/Apache-2.0")
+        case "GPL 3.0":
+            return ("https://www.gnu.org/licenses/gpl-3.0")
+        case "BSD 3":
+            return ("https://opensource.org/licenses/BSD-3-Clause")
+        default:
+            return ("")
+
     }
 }
 // TODO: Create a function that returns the license section of README
 // If there is no license, return an empty string
-function renderStuff(license) {
+function renderLicenseSection(license) {
     return `[![License](${renderLicenseBadge(license)})](${renderLicenseLink(license)})`
 }
 
@@ -40,8 +44,40 @@ function renderStuff(license) {
 // TODO: Create a function to generate markdown for README
 function generateMarkdown(data) {
     return `# ${data.title}
-
-    `
+    
+    ${renderLicenseBadge(data.license)}
+    
+    ## Description
+    ${data.description}
+   
+    ## Table of Contents
+    [Installation](#Installation)  
+    [Usage](#Usage)  
+    [License](#License)  
+    [Contributing](#Contribution-Guidelines)  
+    [Tests](#How-To-Test)  
+    [Questions](#Questions)  
+    
+    ## Installation
+    \`\`\`${data.install}\`\`\`
+   
+    ## Usage
+    ${data.use}
+    ${renderLicenseSection(data.license)}
+   
+    ## Contribution Guidelines
+    ${data.contribute}
+    
+    ## How to Test
+    ${data.test}
+    
+    ## Questions
+    [github](https://github.com/${data.github})
+   
+    ${data.email}  
+    `;
 }
+
+
 
 module.exports = generateMarkdown;
